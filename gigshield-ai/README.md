@@ -76,6 +76,18 @@ else:
 
 > "Traditional insurance is broken for gig workers. It requires documentation, lengthy claim processes, and weeks of waiting. Meanwhile, a Zomato delivery rider loses ₹800 on a single rainy day with zero recourse. Over a monsoon season, that's ₹10,000+ lost — with no protection whatsoever."
 
+## 🚀 Deployment (Vercel)
+
+To deploy this project on Vercel:
+1.  **Connect your GitHub Repository**.
+2.  **Framework Preset**: Other.
+3.  **Root Directory**: `.` (The root of the repo).
+4.  **Build Command**: `cd frontend && npm install && npm run build`.
+5.  **Output Directory**: `frontend/dist`.
+6.  **Configuration**: I've provided a `vercel.json` that handles the routing between the Python API and the React frontend.
+
+Note: Ensure you have a `requirements.txt` in the root for the Python functions.
+
 ---
 
 **[SOLUTION – 0:35–1:05]**
