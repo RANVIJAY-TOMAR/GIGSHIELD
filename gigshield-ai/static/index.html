@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GigShield AI – Parametric Insurance for Gig Workers</title>
+  <meta name="description" content="AI-powered parametric insurance protecting India's gig workers from income loss due to adverse weather and environmental conditions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ═══════════════════════  NAV  ═══════════════════════ -->
+<nav class="navbar">
+  <div class="nav-brand">
+    <div class="logo-icon">🛡️</div>
+    <span class="brand-name">GigShield <span class="brand-accent">AI</span></span>
+  </div>
+  <div class="nav-links">
+    <a href="#analyzer" class="nav-link">Analyzer</a>
+    <a href="#pricing" class="nav-link">Plans</a>
+    <a href="#fraud" class="nav-link">Fraud</a>
+    <span class="nav-badge">India's #1 Gig Protection</span>
+  </div>
+</nav>
+
+<!-- ═══════════════════════  HERO  ═══════════════════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-tag">🚀 Hackathon Demo · Guidewire 2026</div>
+    <h1 class="hero-title">Protect Your <span class="gradient-text">Gig Income</span><br/>With AI Intelligence</h1>
+    <p class="hero-sub">Parametric insurance that pays out <strong>automatically</strong> when weather or pollution threatens your livelihood — no paperwork, no waiting.</p>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">50M+</span><span class="stat-label">Gig Workers Protected</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><span class="stat-num">₹99</span><span class="stat-label">Starting Per Week</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><span class="stat-num">0s</span><span class="stat-label">Claims Processing</span></div>
+    </div>
+    <a href="#analyzer" class="cta-btn">Check My Risk Now <span class="btn-arrow">→</span></a>
+  </div>
+  <div class="hero-visual">
+    <div class="shield-container">
+      <div class="shield-ring ring-1"></div>
+      <div class="shield-ring ring-2"></div>
+      <div class="shield-ring ring-3"></div>
+      <div class="shield-core">🛡️</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════  ANALYZER  ═══════════════════════ -->
+<section class="section" id="analyzer">
+  <div class="section-header">
+    <h2 class="section-title">AI Risk <span class="gradient-text">Analyzer</span></h2>
+    <p class="section-sub">Enter your details to get instant risk assessment and payout calculation</p>
+  </div>
+
+  <div class="analyzer-grid">
+    <!-- Input Card -->
+    <div class="card input-card">
+      <div class="card-header">
+        <div class="card-icon">📍</div>
+        <h3>Your Details</h3>
+      </div>
+      <form id="analyzerForm">
+        <div class="form-group">
+          <label for="city">City</label>
+          <div class="input-wrapper">
+            <span class="input-icon">🏙️</span>
+            <input type="text" id="city" name="city" placeholder="e.g. Mumbai, Delhi, Bangalore…" list="cityList" autocomplete="off" required />
+            <datalist id="cityList">
+              <option value="Mumbai"/>
+              <option value="Delhi"/>
+              <option value="Bangalore"/>
+              <option value="Hyderabad"/>
+              <option value="Chennai"/>
+              <option value="Kolkata"/>
+              <option value="Pune"/>
+              <option value="Ahmedabad"/>
+              <option value="Jaipur"/>
+              <option value="Lucknow"/>
+            </datalist>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="income">Weekly Income (₹)</label>
+          <div class="input-wrapper">
+            <span class="input-icon">💰</span>
+            <input type="number" id="income" name="income" placeholder="e.g. 5000" min="100" max="100000" required />
+          </div>
+        </div>
+
+        <button type="submit" class="analyze-btn" id="analyzeBtn">
+          <span class="btn-text">Analyze My Risk</span>
+          <span class="btn-spinner" id="spinner" style="display:none">⏳</span>
+        </button>
+      </form>
+
+      <div class="info-chips">
+        <div class="chip">✅ No KYC Required</div>
+        <div class="chip">✅ Instant Results</div>
+        <div class="chip">✅ Auto-Payout</div>
+      </div>
+    </div>
+
+    <!-- Results Card (hidden until analyzed) -->
+    <div class="results-area" id="resultsArea" style="display:none">
+
+      <!-- Weather Card -->
+      <div class="card weather-card" id="weatherCard">
+        <div class="card-header">
+          <div class="card-icon" id="weatherIcon">🌦️</div>
+          <h3>Live Weather Conditions</h3>
+        </div>
+        <div class="weather-grid">
+          <div class="weather-stat">
+            <span class="wlabel">City</span>
+            <span class="wvalue" id="wCity">—</span>
+          </div>
+          <div class="weather-stat">
+            <span class="wlabel">Condition</span>
+            <span class="wvalue" id="wCondition">—</span>
+          </div>
+          <div class="weather-stat">
+            <span class="wlabel">Rainfall</span>
+            <span class="wvalue" id="wRainfall">— mm</span>
+          </div>
+          <div class="weather-stat">
+            <span class="wlabel">AQI</span>
+            <span class="wvalue" id="wAqi">—</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Risk Card -->
+      <div class="card risk-card" id="riskCard">
+        <div class="card-header">
+          <div class="card-icon">⚡</div>
+          <h3>AI Risk Assessment</h3>
+        </div>
+
+        <div class="risk-meter-wrap">
+          <div class="risk-level-badge" id="riskBadge">— RISK</div>
+          <div class="risk-bar-track">
+            <div class="risk-bar-fill" id="riskBarFill" style="width:0%"></div>
+          </div>
+          <div class="risk-score-label">Risk Score: <strong id="riskScore">0</strong>/100</div>
+        </div>
+
+        <div class="payout-banner" id="payoutBanner" style="display:none">
+          <div class="payout-icon">⚡</div>
+          <div class="payout-content">
+            <div class="payout-title">Automatic Payout Triggered!</div>
+            <div class="payout-sub">No claims required – funds transfer automatically</div>
+          </div>
+        </div>
+
+        <div class="result-grid">
+          <div class="result-item">
+            <span class="rlabel">Predicted Income Loss</span>
+            <span class="rvalue red-text" id="incomeLoss">₹—</span>
+          </div>
+          <div class="result-item">
+            <span class="rlabel">Suggested Payout</span>
+            <span class="rvalue green-text" id="suggestedPayout">₹—</span>
+          </div>
+          <div class="result-item">
+            <span class="rlabel">Payout Rate</span>
+            <span class="rvalue" id="payoutPct">—%</span>
+          </div>
+          <div class="result-item">
+            <span class="rlabel">Trigger Condition</span>
+            <span class="rvalue" id="triggerStatus">—</span>
+          </div>
+        </div>
+
+        <div class="trigger-conditions">
+          <div class="trigger-title">📋 Trigger Conditions</div>
+          <div class="trigger-row" id="condRain">
+            <span class="cond-dot"></span>
+            <span>Rainfall &gt; 50mm</span>
+            <span class="cond-val" id="condRainVal">—</span>
+          </div>
+          <div class="trigger-row" id="condAqi">
+            <span class="cond-dot"></span>
+            <span>AQI &gt; 300</span>
+            <span class="cond-val" id="condAqiVal">—</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════  HOW IT WORKS  ═══════════════════════ -->
+<section class="section how-section">
+  <div class="section-header">
+    <h2 class="section-title">How <span class="gradient-text">It Works</span></h2>
+  </div>
+  <div class="steps-row">
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <div class="step-icon">📝</div>
+      <h4>Sign Up Weekly</h4>
+      <p>Choose a plan for as low as ₹99/week – no paperwork or lengthy forms.</p>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <div class="step-icon">🤖</div>
+      <h4>AI Monitors</h4>
+      <p>Our engine continuously tracks rainfall, AQI & environmental conditions.</p>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <div class="step-icon">⚡</div>
+      <h4>Auto Payout</h4>
+      <p>When triggers are met, payout is processed instantly to your UPI account.</p>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="step-card">
+      <div class="step-num">04</div>
+      <div class="step-icon">🏦</div>
+      <h4>Income Protected</h4>
+      <p>No claim forms, no agent visits – full transparency on blockchain ledger.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════  PRICING  ═══════════════════════ -->
+<section class="section" id="pricing">
+  <div class="section-header">
+    <h2 class="section-title">Weekly <span class="gradient-text">Protection Plans</span></h2>
+    <p class="section-sub">Flexible plans for every gig worker – cancel anytime</p>
+  </div>
+  <div class="pricing-grid">
+
+    <div class="pricing-card" id="plan-basic">
+      <div class="plan-name">Basic</div>
+      <div class="plan-price">₹99<span>/week</span></div>
+      <div class="plan-for">Ideal for part-time gig workers</div>
+      <ul class="plan-features">
+        <li>✅ Weather-based triggers</li>
+        <li>✅ Rainfall &gt; 50mm coverage</li>
+        <li>✅ 15% income replacement</li>
+        <li>✅ Instant UPI payout</li>
+        <li>❌ AQI coverage</li>
+        <li>❌ Fraud protection</li>
+      </ul>
+      <button class="plan-btn" onclick="selectPlan('basic')">Get Basic</button>
+    </div>
+
+    <div class="pricing-card popular" id="plan-pro">
+      <div class="popular-badge">⭐ Most Popular</div>
+      <div class="plan-name">Pro</div>
+      <div class="plan-price">₹149<span>/week</span></div>
+      <div class="plan-for">For full-time delivery / cab workers</div>
+      <ul class="plan-features">
+        <li>✅ Weather + AQI triggers</li>
+        <li>✅ 30% income replacement</li>
+        <li>✅ Instant UPI payout</li>
+        <li>✅ Fraud protection</li>
+        <li>✅ Weekly risk report</li>
+        <li>❌ Hospital coverage</li>
+      </ul>
+      <button class="plan-btn popular-btn" onclick="selectPlan('pro')">Get Pro</button>
+    </div>
+
+    <div class="pricing-card" id="plan-elite">
+      <div class="plan-name">Elite</div>
+      <div class="plan-price">₹199<span>/week</span></div>
+      <div class="plan-for">Maximum protection for top earners</div>
+      <ul class="plan-features">
+        <li>✅ All triggers covered</li>
+        <li>✅ 40% income replacement</li>
+        <li>✅ Instant UPI payout</li>
+        <li>✅ Advanced fraud shield</li>
+        <li>✅ Accident coverage</li>
+        <li>✅ 24/7 priority support</li>
+      </ul>
+      <button class="plan-btn" onclick="selectPlan('elite')">Get Elite</button>
+    </div>
+
+  </div>
+
+  <!-- Plan Selection Confirmation -->
+  <div class="plan-confirm" id="planConfirm" style="display:none">
+    <div class="confirm-icon">🎉</div>
+    <div class="confirm-text">
+      <strong id="confirmPlanName">Pro</strong> plan selected!
+      <span>Your weekly protection starts from next Monday.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════  FRAUD DETECTION  ═══════════════════════ -->
+<section class="section" id="fraud">
+  <div class="section-header">
+    <h2 class="section-title">AI Fraud <span class="gradient-text">Detection</span></h2>
+    <p class="section-sub">Advanced behavioral analysis protects our pool from fraudulent claims</p>
+  </div>
+
+  <div class="fraud-grid">
+    <div class="card fraud-status-card" id="fraudStatusCard">
+      <div class="card-header">
+        <div class="card-icon">🔍</div>
+        <h3>Fraud Risk Status</h3>
+      </div>
+      <div class="fraud-meter">
+        <div class="fraud-badge" id="fraudBadge">
+          <div class="fraud-dot" id="fraudDot"></div>
+          <span id="fraudLevel">Run analyzer first</span>
+        </div>
+      </div>
+      <div class="fraud-reason" id="fraudReason">
+        Complete the risk analysis above to see your fraud risk evaluation.
+      </div>
+
+      <div class="fraud-signals">
+        <div class="signal-title">🤖 AI Detection Signals</div>
+        <div class="signal-item" id="sig1">
+          <span class="sig-icon">📊</span>
+          <span>Platform activity during adverse weather</span>
+          <span class="sig-status" id="sig1Status">Checking…</span>
+        </div>
+        <div class="signal-item" id="sig2">
+          <span class="sig-icon">📍</span>
+          <span>Location consistency with claimed city</span>
+          <span class="sig-status" id="sig2Status">Checking…</span>
+        </div>
+        <div class="signal-item" id="sig3">
+          <span class="sig-icon">💸</span>
+          <span>Income declaration vs. historical earnings</span>
+          <span class="sig-status" id="sig3Status">Checking…</span>
+        </div>
+        <div class="signal-item" id="sig4">
+          <span class="sig-icon">🕐</span>
+          <span>Claim timing pattern analysis</span>
+          <span class="sig-status" id="sig4Status">Checking…</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card fraud-info-card">
+      <div class="card-header">
+        <div class="card-icon">🛡️</div>
+        <h3>How Fraud Protection Works</h3>
+      </div>
+      <div class="fraud-flow">
+        <div class="flow-item">
+          <div class="flow-icon">📡</div>
+          <div class="flow-text">
+            <strong>Behavioral Monitoring</strong>
+            <span>Platform activity tracked during adverse weather events</span>
+          </div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-icon">🧠</div>
+          <div class="flow-text">
+            <strong>AI Pattern Analysis</strong>
+            <span>Machine learning detects unusual claim patterns</span>
+          </div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-icon">⚖️</div>
+          <div class="flow-text">
+            <strong>Fair Investigation</strong>
+            <span>Flagged cases reviewed by human experts within 24hrs</span>
+          </div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-icon">✅</div>
+          <div class="flow-text">
+            <strong>Clean Record Rewards</strong>
+            <span>Zero fraud history gets you premium discounts next week</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════  FOOTER  ═══════════════════════ -->
+<footer class="footer">
+  <div class="footer-brand">
+    <span class="logo-icon">🛡️</span>
+    <span class="brand-name">GigShield <span class="brand-accent">AI</span></span>
+  </div>
+  <p class="footer-tagline">Protecting India's 50M+ gig workers with AI-powered parametric insurance.</p>
+  <div class="footer-badges">
+    <span class="fbadge">🏆 Guidewire Hackathon 2026</span>
+    <span class="fbadge">🤖 AI-Powered</span>
+    <span class="fbadge">⚡ Instant Payouts</span>
+  </div>
+  <p class="footer-note">Built with ❤️ for India's gig economy · Demo prototype · Not a real insurance product</p>
+</footer>
+
+<!-- Plan modal -->
+<div class="modal-overlay" id="modalOverlay" style="display:none" onclick="closeModal()">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-icon">🎉</div>
+    <h3 id="modalTitle">Plan Selected!</h3>
+    <p id="modalBody">You have selected the Pro plan for ₹149/week.</p>
+    <button class="modal-btn" onclick="closeModal()">Awesome, Got It!</button>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
